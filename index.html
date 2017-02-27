@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Movie Database - Anna Hallgren Gribbe</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h1>Movie Database</h1>
+
+	<form>
+		<!--Text Input Title-->
+		<label for="title">Movie Title: </label>
+			<input id="title" name="title" type="text" size="50">
+		<!--Text Input Year-->
+		<label for="year">Year: </label>
+			<input id="year" name="year" type="text" size="5"><br/>
+		<!--Range Input Ratings-->
+		<label for="rating">Ratings: </label>
+			1 <input id="rating" name="rating" type="range" max="10" min="1">10<br/>
+		<!--Text Input Genre-->
+		<label for="genre">Genre: </label>
+			<input id="genre" name="genre" type="text" size="50"><br/>
+		<!--Submit Button-->
+		<input type="button" id="submitButton" value="Add movie!"><br>
+	</form>
+	<div id="movies">
+		
+	</div>
+
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
