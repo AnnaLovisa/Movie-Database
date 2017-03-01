@@ -5,12 +5,26 @@
 /* ================== Module Pattern ================== */
 
 
+   /*   I have used a module pattern for this assignment. An advantage of structuring my functions in a module pattern like this
+        may be that it makes it much more easier and readable when you organize your functions in the same way you do as you
+        organize your objects. Another good part of it, is that you can decide which methods you want to make public, while
+        the rest stays in the local/private scopes. We should avoid placing functions in the global scope and rather keep as 
+        much as possible in the private scopes, only to call those functions we need. This to keep for example unauthorized away
+        from sensitive data that could be misused. And this is where the module pattern comes in handy.
+
+    */
+
+
+
+
 let MovieDatabase = (function() {
 
-    //I detta scope deklareras privata funktioner/variabler
-    //Alla film-objekt som ligger i min movies array är alltså privata
-    //och samlade i en anonym funktion med en namespace som jag använder
-    //när jag vill göra något med det i det privata scopet
+    /* In this scope are my private functions/variables being declared.
+    All movie-objects that are in my movies-array are therefore
+    locally placed in an anonymous function with a namespace
+    that I use when I want to do something with my functions in 
+    the private scope */
+
 
     var movies =  [
 { 
@@ -18,7 +32,8 @@ let MovieDatabase = (function() {
     year: 2013,
     cover: "http://www.boweryboogie.com/content/uploads/2013/05/The-Great-Gatsby-Movie-2013.jpg",
     genres: ['Drama', 'Romance'],
-    ratings: [7], 
+    ratings: [7, 4, 6],
+    average: 0, 
     actors: [
 		{
 		name: "Leonardo DiCaprio"
@@ -35,7 +50,8 @@ let MovieDatabase = (function() {
     year: 2001,
     cover: "https://movierob.files.wordpress.com/2014/02/oceans-eleven.jpg",
     genres: ['Drama','Romance'],
-    ratings: [7],
+    ratings: [7, 8, 5],
+    average: 0,
     actors: [
 		{
 		name: "George Clooney"
@@ -52,7 +68,8 @@ let MovieDatabase = (function() {
     year: 2005,
     cover: "http://vignette3.wikia.nocookie.net/marvel_dc/images/6/67/V_for_Vendetta_movie_poster.JPG/revision/latest?cb=20071212185824",
     genres: ['Action', 'Drama', 'Thriller'],
-    ratings: [8],
+    ratings: [8, 3, 4, 6],
+    average: 0,
     actors: [
 		{
 		name: "Hugo Weaving"
@@ -68,7 +85,8 @@ let MovieDatabase = (function() {
     year: 1994,
     cover: "https://images-na.ssl-images-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_UX182_CR0,0,182,268_AL_.jpg",
     genres: ['Crime', 'Drama'],
-    ratings: [9],
+    ratings: [9, 7, 3, 9],
+    average: 0,
     actors: [
 		{
 		name: "John Travolta"
@@ -84,7 +102,8 @@ let MovieDatabase = (function() {
     year: 2001,
     cover: "https://upload.wikimedia.org/wikipedia/en/3/30/Spirited_Away_poster.JPG",
     genres: ['Animation', 'Adventure', 'Family'],
-    ratings: [9],
+    ratings: [9, 9],
+    average: 0,
     actors: [
 		{
 		name: "Daveigh Chase"
@@ -101,7 +120,8 @@ let MovieDatabase = (function() {
     year: 2009,
     cover: "https://upload.wikimedia.org/wikipedia/en/c/c3/Inglourious_Basterds_poster.jpg",
     genres: ['Drama', 'Adventure', 'War'],
-    ratings: [8],
+    ratings: [8, 9, 9],
+    average: 0,
     actors: [
 		{
 		name: "Brad Pitt"
@@ -118,7 +138,8 @@ let MovieDatabase = (function() {
     year: 2007,
     cover: "https://img.123clouds.ru/2015/09/19/poster/I_am_Legend_1.jpg",
     genres: ['Drama', 'Horror', 'Sci-Fi'],
-    ratings: [7],
+    ratings: [7, 6, 8],
+    average: 0,
     actors: [
 		{
 		name: "Will Smith"
@@ -135,7 +156,8 @@ let MovieDatabase = (function() {
     year: 2016,
     cover: "http://pics.filmaffinity.com/la_la_land-262021831-large.jpg",
     genres: ['Drama', 'Comedy', 'Musical'],
-    ratings: [9],
+    ratings: [9, 6],
+    average: 0,
     actors: [
 		{
 		name: "Ryan Gosling"
@@ -149,19 +171,22 @@ let MovieDatabase = (function() {
 
 ];
 
-/*Hela funktionen returnerar ett enda objekt med alla funktioner som tillhör våra moduler
-och all data som den använder. Varje funktion blir i sin tur ett objekt. Genom att returnera
-ut alla funktioner som ett objekt kommer man sen åt funktionerna och kan göra vad man vill med dem*/
+
+    /* The anonymous function returns an object with all the functions/methods that belong to my modules
+    and all the data that is uses. By returning my functions as an object like this, it is then possible to reach those
+    functions I want to use for something. */
+
 
 return {
 
-        //Funktion som skriver ut/visar alla filmer
+
+        //Function that returns all movies at the same time
         showAllMovies: function(){
 
-            //Vi refererar till movies som är i scopet ovan och därför tillgängligt i denna funktion. Den finns alltså i en closure
+            //Referring to the movies-array in the scope above and therefore accessible in this function. So movies exist in a closure
             return movies.map((movie) => {
 
-                //Returnerar titlarna på alla filmerna
+                //Return the title of all movies
                 return movie.title;
             },0);
 
@@ -169,185 +194,338 @@ return {
 
 
 
-        //Funktion som returnerar en lista över alla filmer som haft premiär det valda året year.
+        //Function that returns a list of all movies that had premiere that chosen year
         getMoviesThisYear: function(year){
 
-            //Filtrerar ut alla filmer som stämmer överens med året som skickas in som argument
+            //Filtering all movies that had premiere the year typed in in the argument
             return movies.filter((movie) =>{
                 return movie.year == year;
 
-                //Gör en map-funktion som returnerar ut titlarna på dessa filmer
+                //Mapping out the titles of all those movies
                 }).map(function(movie){
                     return movie.title;
                 },0);
         },
 
 
-        /* Problem: Funktionen skriver endast ut en film även om det finns flera med samma rating */
+
+        getAverageRating: function(){
+
+            //Looping through the whole movies-array to reach every movie's ratings-property that in turn is an array
+            for(let i = 0; i < movies.length; i++){
+
+                /* Counting the sum for every movie's ratings-array with reduce. totalValue is set to 0
+                as startvalue and value sum up all the values for every movie's ratings-array. So for every
+                loop, this is summed up for each movie. */          
+                movies[i].ratings.reduce(function(totalValue, value){
+
+                    //For every loop the new value is collected in the movies-array's average-property
+                    movies[i].average += value;
+                            
+                },0);
+            
+            /* I get the actual average-rate for every movie by dividing every movie's ratings-arrays summed up value with 
+            the length of every movie's ratings-array for every loop. The average return a number with one decimal */
+            movies[i].average = (movies[i].average/movies[i].ratings.length).toFixed(1);
+     
+            }
+
+            //Return all the movies after the loop
+            return movies;
+
+        },
+
+
+
+        //Function that returns the movie with the highest average-value of the movie's ratings
+        getTopRatedAverageMovie: function(){
+
+            /* Return a reduce-function on the movies-array with two comparison-values that compare the average-properties with each other.
+            If average-value before is higher than the averagevalue bow, the code will return the valueBefore, otherwise the valueNow */
+            return movies.reduce(function(valueBefore, valueNow) {
+                return valueBefore.average > valueNow.average ? valueBefore : valueNow;
+            });
+        },
+
+
+
+        //Function that returns the movie with the highest average-value of the movie's ratings
+        getWorstRatedAverageMovie: function(){
+                           
+                /* Return a reduce-function on the movies-array with two comparison-values that compare the average-properties with each other.
+                If average-value before is lower than the average-value now, the code will return the valueBefore, otherwise the valueNow */
+                return movies.reduce(function(valueBefore, valueNow) {
+                    return valueBefore.average < valueNow.average ? valueBefore : valueNow;
+            });
         
-        //Funktion som returnerar det objektet som motsvarar den film som har bäst genomsnittligt betyg
+        },
+
+
+
+        /* Problem: Funktionen skriver endast ut en film även om det finns flera med samma rating-värden */
+        
+        //Function that returns the movie with the highest rating
         getTopRatedMovie: function(){
 
-            //Skapar en max-värde-variabel som börjar på första indexet i movies ratings-array
+            //Create a max-value-variable that starts at first index in the movies' ratings-array
             let maxValue = movies[0].ratings;
 
-            //Skapar en variabel som börjar på första indexet i movies-arrayen
+            //Create a variable that starts at first index in the movies-array
             let result = movies[0];
 
-            //Loopar igenom movies-arrayen
             for (var i = 0; i < movies.length; i++){
 
-                //Om värdet på ratingens index som loopas igenom överstiger max-värdet blir ratingens index det nya max-värdet som utgångsvärde
-                //Filmen med ratingens max-värde hamnar då i resultat-variabeln inför nästa loop
+                /*If the value of the ratings index being looped through is above the max-value, the ratings index is placed in the new
+                 max-value as the new default-value. The movie with that rating's max-value are then placed in the result-variable for the
+                 next loop*/
                 if(movies[i].ratings > maxValue){
+
                     maxValue = movies[i].ratings;
                     result = movies[i];
                 }
             }
-            //Den slutgiltiga filmens titel returneras
+
+            //Return the final title of the movie with the highest ratings-value
             return result.title;
         },
 
 
-        /* Problem: Funktionen skriver endast ut en film även om det finns flera med samma rating */
+        /* Problem: Funktionen skriver endast ut en film även om det finns flera med samma rating-värden */
     
-        //Funktion som returnerar det objektet som motsvarar den film som har sämst genomsnittligt betyg.
-        //Räkna inte med filmer som inte fått något betyg än
+
+        //Function that returns the movie with the lowest rating
         getWorstRatedMovie: function(){
 
-            //Skapar en min-värde-variabel som börjar på första indexet i movies ratings-array
+            //Create a min-value-variable that starts at first index in the movies' ratings-array
             let minValue = movies[0].ratings;
 
-            //Skapar en variabel som börjar på första indexet i movies-arrayen
+            //Create a variable that starts at first index in the movies-array
             let result = movies[0];
 
-            //Loopar igenom movies-arrayen
             for (var i = 0; i < movies.length; i++){
-                //Om värdet på ratingens index som loopas igenom understiger min-värdet blir ratingens index det nya min-värdet som utgångsvärde
-                //Filmen med ratingens min-värde hamnar då i resultat-variabeln inför nästa loop
+
+                /*If the value of the ratings index being looped through is under the min-value, the ratings index is placed in the new
+                 min-value as the new default-value. The movie with that rating's min-value are then placed in the result-variable for the
+                 next loop*/
                 if (movies[i].ratings < minValue){
+                
                     minValue = movies[i].ratings;
                     result = movies[i];
+
                 }   
             }
-            //Den slutgiltiga filmens titel returneras
+
+            //Return the final title of the movie with the lowest ratings-value
             return result.title;
         },
 
 
- 
-    
 
-        //Funktion som skapar ett objekt genom en konstruktor och lägger värdet på parametrarna som egenskaper i objektet
-        createMovie: function(title, year,  cover, genres, ratings, actors){
+        //Function that creates an object through a constructor and put the value of the parameters as properties in the object
+        createMovie: function(title, year,  cover, genres, ratings, average, actors){
             
-            //Konstruktor
+            //Movie-Constructor
             function Movie(){
                 this.title = title;
                 this.year = year;
                 this.cover = cover;
                 this.genres = genres;
                 this.ratings = ratings;
+                this.average = average;
                 this.actors = actors;       
             }
 
-            //Funktion som lägger till det skapade objektet i databasen
+
+            //Function that adds the created object in the Movie Database-object
             function addMovie(){
 
-                //Lägger hela movies-objektet i en variabel som en "ny array"
+                //Placing the whole movies-array in a variable as a "new" array
                 let newMoviesArray = movies;
 
-                //Pushar in mitt nya objekt newMovie som skapats genom konstruktorn i den "nya arrayen"
+                //Pushing my new object newMovie that has been created through the constructor in the "new array"
                 newMoviesArray.push(newMovie);
 
-                //Lägger hela den uppdaterade arrayen i en till variabel som returneras
+                //Placing the whole updated array into another variable that is returned
                 movie = newMoviesArray; 
                 return movie;          
             }
 
-            //Skapar nytt objekt från konstruktorn
+            //Create a new object called newMovie
             let newMovie = new Movie();
-            //returnerar funktionen som lägger till det skapade objektet i databasen där jag skickar in mitt nya objekt som argument            
+
+            //Return the function addMovie with my new Movie-object as argument            
             return addMovie(newMovie);
             
         },
 
 
 
-      
-        //Funktion som lägger till värdet på parametern rate till egenskapen ratings i objektet Movie
-
-        //Funktion som tar in en titel på en film, ett nytt rating-värde för filmen och returnerar filmens nya rating-array i databasen
+        /* Function that takes in a title of an already existing movie together with a new rating-value for that movie and returns that
+        movie's ratings-array with the new rating-value */
         rateMovie: function(title, rating){
 
-            //Filtrerar ut den film vars titel stämmer överens med det inskickade argumentet
+            //Filtering out the movie who has a title the same as in the sent in title-argument
              return movies.filter((movie) =>{
                     return movie.title == title;
 
-                //Mappar ut filmens rating-array
+                //Mapping out the movie's ratings-array
                 }).map(function(movie){
                    
-                    //Lägger till den inskickade ratingen till den valda filmen och returnerar det
+                    //Adding the rating-value that is sent in as an argument to the chosen movie's ratings array
                     return movie.ratings.push(rating);
 
-                        //Returnerar ut rating-arrayen
-                        return ratings.rating;
+                    //Return the updated ratings-array
+                    return ratings.rating;
 
                 },0);
 
         },
 
-        //Funktion som skriver ut alla objekt
-        printObject: function(){
-                return movies;
-        },
 
-        
-        //Kan inte filtrera på flera genres änsålänge
-        //Funktion som returnerar alla filmer som har samma genre som värdet på parametern genre (ska kunna filtrera på flera genrer)
-        getMoviesByGenre: function(genre){
+    
+        //Function that returns all movies that have the same genre as the values in the parameter genre
+        getMoviesByGenre: function(genre1, genre2, genre3, genre4){
                 
-                //Filtrerar ut de filmer som har en genre som stämmer överens med den inskickade genren
+                //Filtering out movies with genres same as in the arguments
                 return movies.filter((movie) =>
-                    movie.genres.some((genres) => genres == genre))
+                
+                    //If some of the values in the movies' genres-arrays correspond to either one of the below mentioned...
+                    movie.genres.some((genres) => genres == genre1 || genres == genre2 || genres == genre3 || genres == genre4))
 
                     .map(movie => {
               
-                    //Mappar ut de filmer som har index-värden som stämmer överens med det inskickade genres-argumentet
-                    if(movie.genres.indexOf(genre).length > 0)
-                    
-                    //Definierar filmernas egenskaper så att filmernas titlar loggas ut
-                    MovieDatabase.defineProperty(movie, genres)
-                    return movie.title;
-                         
+                    /* ...and if the first sent in value is above the indexvalue in the genres-array (meaning if the
+                    sent in value exists in the movie's genres-array) then the function will return all titles of those movies */
+                    if(movie.genres.indexOf(genre1).length > 0)
+
+                            movie.genres = genres;
+                            return movie.title;
+                                  
                 },0)  
         },
 
 
 
-
-
-
-
-//Här slutar return av objektet med alla funktioner
+//End of object with all functions in the module
 }
 
+//End of module
 })();
 
 
-//Skapar en funktion som skriver ut de funktioner/variabler jag valt att göra publika i min MovieDatabase
-function printOutCode(){
-    console.log("Show all movies: ",  MovieDatabase.showAllMovies());
-    console.log("Get movies this year: ", MovieDatabase.getMoviesThisYear(2001));
-    console.log("Get top rated movie: ", MovieDatabase.getTopRatedMovie());
-    console.log("Get worst rated movie: ", MovieDatabase.getWorstRatedMovie());
-    console.log("Create movie: ", MovieDatabase.createMovie('Avatar', 2009, "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg", ['Action', 'Adventure', 'Fantasy'], [8], ['Sam Worthington', 'Zoe Saldana']))
-    console.log("Show all movies: ", MovieDatabase.showAllMovies());
-    console.log("Rate movie: ", MovieDatabase.rateMovie('Inglorious Basterds', 9));
-    console.log("Print out all objects :", MovieDatabase.printObject());
-    console.log("Get movies by genre :", MovieDatabase.getMoviesByGenre('Romance'));
+
+/* ================== Functions outside the module to reach my functions inside the module with ================== */
+
+
+
+    //Function that prints out those functions/variables I choose to make public in my MovieDatabase-object
+    function printOutCode(){
+        console.log("Show all movies: ", MovieDatabase.showAllMovies());
+        console.log("Get movies from year: ", MovieDatabase.getMoviesThisYear(2001));
+        console.log("Get top rated movie: ", MovieDatabase.getTopRatedMovie());
+        console.log("Get worst rated movie: ", MovieDatabase.getWorstRatedMovie());
+        console.log("Get average-rate of chosen movie :", MovieDatabase.getAverageRating());
+        console.log("Get top rated average movie: ", MovieDatabase.getTopRatedAverageMovie());
+        console.log("Get worst rated average movie: ", MovieDatabase.getWorstRatedAverageMovie());
+        console.log("Create movie: ", MovieDatabase.createMovie('Avatar', 2009, "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg", ['Action', 'Adventure', 'Fantasy'], [8], 0, ['Sam Worthington', 'Zoe Saldana']))        
+        console.log("Show all movies: ", MovieDatabase.showAllMovies());
+        console.log("Rate movie: ", MovieDatabase.rateMovie('Inglorious Basterds', 9));
+        console.log("Get movies by genre :", MovieDatabase.getMoviesByGenre('Thriller', 'Adventure', 'Horror'));
+    }
+    printOutCode();
+
+
+
+
+/* Jag har inte hunnit skapa min kod som får användaren att skicka in värden med hjälp av funktionerna. 
+Den funktionen jag skrivit som fungerar men som heller inte är klar skriver ut alla filmer när man klickar
+på Add movies. Tanken är att skriva alla de funktioner som hämtar data från användaren utanför modulen och
+att jag i de funktionerna kallar på mina lokala funktioner i modulen som jag behöver så som jag gjort
+ovan när jag bara console.loggat ut koden. Så jag vill separera de funktioner som hanterar min Movie databas
+från de funktioner som hanterar informationen från användar-inputen för att skapa ordning på torpet */
+
+
+
+    //Function that gets data from my HTML-file and the movies-array in the MovieDatabase-object
+    function getCode(){
+
+        //Function that prints out all movie-titles in the HTML-file on button-click
+        function printOutAllMovies(){
+
+        //Get out button from HTML
+        let inputValue1 = document.getElementById("submitButton_2");
+
+        //Get out ul-element from HTML
+        let list_1 = document.getElementById("list_1");
+
+        //Adding the submit-button to an eventlistener
+        inputValue1.addEventListener("click", function(){
+
+            //Call the function showAllMovies from my module
+            let showAll = MovieDatabase.showAllMovies();
+
+            //Creating textnode of what is being returned in my showAllMovies-function
+            let showAllText = document.createTextNode(showAll);
+
+            //Create a li-element
+            var list_2 = document.createElement("li");
+
+            //Appending the li-element to the ul-element
+            list_1.appendChild(list_2);
+
+            //Appending what is being returned in the showAllMovies-function to the li-element
+            list_2.appendChild(showAllText);
+            })
+        }
+
+        printOutAllMovies();
+
+
+
+
+/* Inte klar
+
+        //Function that add movies from the user-input values
+        function addMovieObject(){
+
+            //Get the button from HTML
+            let inputValue2 = document.getElementById("submitButton_2");
+
+            //Create an empty array-list
+            var movieList = [];
+
+            //Get the input-elements from HTML
+            let titleInput = document.getElementById("title");
+            let yearInput = document.getElementById("year");
+
+            //Add an eventlistener to the submit-button
+            inputValue2.addEventListener("click", function(){
+
+            //Take out the value of the users input
+            let titleValue = titleInput.value;
+
+            //Call the createMovie function with parametres
+            var movie = MovieDatabase.createMovie(titleValue, yearInput);
+
+            //Push the new movie into the empty list
+            movieList.push(movie);
+
+            //Get the movies-element from HTML
+            var movies = document.getElementById("movies");
+
+            //Put the new movie in the movies-element
+            movies.innerHTML = movie;
+            })
+            addMovieObject();
+
+
+
+    }*/
+
 }
-printOutCode();
+getCode();
+
+
 
 
 

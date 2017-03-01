@@ -10,6 +10,16 @@
 
 <h1>Movie Database</h1>
 
+
+<!--
+Visa en lista på alla filmer
+Lägga till en ny film m.h.a. formulär/input-fält
+Sätta betyg på en film
+Filtrera efter genre och betyg
+-->
+
+
+	<!-- Form for user to add a new movie -->
 	<form>
 		<!--Text Input Title-->
 		<label for="title">Movie Title: </label>
@@ -24,10 +34,22 @@
 		<label for="genre">Genre: </label>
 			<input id="genre" name="genre" type="text" size="50"><br/>
 		<!--Submit Button-->
-		<input type="button" id="submitButton" value="Add movie!"><br>
+		<input type="button" id="submitButton_1" value="Add movie"><br>
 	</form>
+
+	<!-- Button for user to show all movies -->
+	<section>
+		<input type="button" id="submitButton_2" value="Show all movies"><br>
+	</section>
+
+	<section>
+		<!-- Här ska man kunna söka på en film genom att filtrera efter genre och betyg -->
+		<!-- Man ska även kunna sätta betyg på den söka filmen -->
+	</section>
 	<div id="movies">
-		
+		<ul id="list_1">
+			
+		</ul>
 	</div>
 
 <script type="text/javascript" src="js/main.js"></script>
