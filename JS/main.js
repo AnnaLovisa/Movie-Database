@@ -179,19 +179,29 @@ let MovieDatabase = (function() {
 
 return {
 
-
         //Function that returns all movies at the same time
         showAllMovies: function(){
 
-            //Referring to the movies-array in the scope above and therefore accessible in this function. So movies exist in a closure
-            return movies.map((movie) => {
+            var result = '';
+            for(var i = 0; i < movies.length; i++){
+                
+                       result += `<p>${movies[i].title}</p>
+                                  <p>${movies[i].year}</p>
+                                  <p><img src="${movies[i].cover}"></p>
+                                  <p>${movies[i].genres}</p>
+                                  <p>${movies[i].ratings}</p>
+                                  <p>${movies[i].average}</p>
+                                  
+                                  `;
+                    
+                    movies[i].actors.forEach(function(actor){
+                        result += `<p>${actor.name}</p>`;      
+                    });
 
-                //Return the title of all movies
-                return movie.title;
-            },0);
-
+            }
+            movies_1.innerHTML = result;
+            
         },
-
 
 
         //Function that returns a list of all movies that had premiere that chosen year
@@ -241,7 +251,7 @@ return {
         getTopRatedAverageMovie: function(){
 
             /* Return a reduce-function on the movies-array with two comparison-values that compare the average-properties with each other.
-            If average-value before is higher than the averagevalue bow, the code will return the valueBefore, otherwise the valueNow */
+            If average-value before is higher than the averagevalue now, the code will return the valueBefore, otherwise the valueNow */
             return movies.reduce(function(valueBefore, valueNow) {
                 return valueBefore.average > valueNow.average ? valueBefore : valueNow;
             });
@@ -249,7 +259,7 @@ return {
 
 
 
-        //Function that returns the movie with the highest average-value of the movie's ratings
+        //Function that returns the movie with the lowest average-value of the movie's ratings
         getWorstRatedAverageMovie: function(){
                            
                 /* Return a reduce-function on the movies-array with two comparison-values that compare the average-properties with each other.
@@ -381,7 +391,6 @@ return {
 
         },
 
-
     
         //Function that returns all movies that have the same genre as the values in the parameter genre
         getMoviesByGenre: function(genre1, genre2, genre3, genre4){
@@ -414,21 +423,21 @@ return {
 
 
 
-/* ================== Functions outside the module to reach my functions inside the module with ================== */
+/* ================== Function outside the module to reach my functions inside the module with ================== */
 
 
 
-    //Function that prints out those functions/variables I choose to make public in my MovieDatabase-object
+    //Function that logs out those functions/variables I choose to make public in my MovieDatabase-object
     function printOutCode(){
-        console.log("Show all movies: ", MovieDatabase.showAllMovies());
+        /*console.log("Show all movies: ", MovieDatabase.showAllMovies());*/
         console.log("Get movies from year: ", MovieDatabase.getMoviesThisYear(2001));
         console.log("Get top rated movie: ", MovieDatabase.getTopRatedMovie());
         console.log("Get worst rated movie: ", MovieDatabase.getWorstRatedMovie());
         console.log("Get average-rate of chosen movie :", MovieDatabase.getAverageRating());
         console.log("Get top rated average movie: ", MovieDatabase.getTopRatedAverageMovie());
         console.log("Get worst rated average movie: ", MovieDatabase.getWorstRatedAverageMovie());
-        console.log("Create movie: ", MovieDatabase.createMovie('Avatar', 2009, "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg", ['Action', 'Adventure', 'Fantasy'], [8], 0, ['Sam Worthington', 'Zoe Saldana']))        
-        console.log("Show all movies: ", MovieDatabase.showAllMovies());
+        /*console.log("Create movie: ", MovieDatabase.createMovie('Avatar', 2009, "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg", ['Action', 'Adventure', 'Fantasy'], [8], 0, ['Sam Worthington', 'Zoe Saldana']))*/        
+        /*console.log("Show all movies: ", MovieDatabase.showAllMovies());*/
         console.log("Rate movie: ", MovieDatabase.rateMovie('Inglorious Basterds', 9));
         console.log("Get movies by genre :", MovieDatabase.getMoviesByGenre('Thriller', 'Adventure', 'Horror'));
     }
@@ -446,84 +455,136 @@ från de funktioner som hanterar informationen från användar-inputen för att 
 
 
 
-    //Function that gets data from my HTML-file and the movies-array in the MovieDatabase-object
-    function getCode(){
+
+/* ================== Module Pattern for functions that handle the DOM and data from the user input ================== */
+
+
+//Object with namespace getCode that contains all functions that take out and manipulate data from the user input
+let getCode = (function() {
+
+
+    /* The anonymous function returns an object with all the functions/methods that belong to my modules
+    and all the data that is uses. By returning my functions as an object like this, it is then possible to reach those
+    functions I want to use for something. */
+
+
+    return {
 
         //Function that prints out all movie-titles in the HTML-file on button-click
-        function printOutAllMovies(){
+        printOutAllMovies: function(){
 
         //Get out button from HTML
-        let inputValue1 = document.getElementById("submitButton_2");
+        let inputValue_2 = document.getElementById("submitButton_2");
 
-        //Get out ul-element from HTML
-        let list_1 = document.getElementById("list_1");
 
         //Adding the submit-button to an eventlistener
-        inputValue1.addEventListener("click", function(){
+        inputValue_2.addEventListener("click", function(){
 
             //Call the function showAllMovies from my module
-            let showAll = MovieDatabase.showAllMovies();
+            MovieDatabase.showAllMovies();
 
-            //Creating textnode of what is being returned in my showAllMovies-function
-            let showAllText = document.createTextNode(showAll);
-
-            //Create a li-element
-            var list_2 = document.createElement("li");
-
-            //Appending the li-element to the ul-element
-            list_1.appendChild(list_2);
-
-            //Appending what is being returned in the showAllMovies-function to the li-element
-            list_2.appendChild(showAllText);
             })
-        }
-
-        printOutAllMovies();
+        },
 
 
+        //Function that add movies from the user-input values to the Movies Database
+        addMoviefromInput: function(){
 
 
-/* Inte klar
+            //Create a loop that creates a dropdown menu list of all years
+            var start = 1900;
+            var end = new Date().getFullYear();
+            var options = "";
+                for(var year = start ; year <= end; year++){
+                    options += "<option>"+ year +"</option>";
+                }
+            //Put the option-element with all the looping years in the HTML-document
+            document.getElementById("year").innerHTML = options;
 
-        //Function that add movies from the user-input values
-        function addMovieObject(){
 
-            //Get the button from HTML
-            let inputValue2 = document.getElementById("submitButton_2");
+            /*======== BUTTON CLICK EVENTS ========*/
+            //Get the submit-button from HTML
+            let inputValue_1 = document.getElementById("submitButton_1");
+
+            //Add an eventlistener to the submit-button
+            inputValue_1.addEventListener("click", function(){
 
             //Create an empty array-list
             var movieList = [];
 
-            //Get the input-elements from HTML
+
+            /*======== TITLE INPUT ========*/
+            //Get the title input element from HTML
             let titleInput = document.getElementById("title");
-            let yearInput = document.getElementById("year");
 
-            //Add an eventlistener to the submit-button
-            inputValue2.addEventListener("click", function(){
-
-            //Take out the value of the users input
+            //Take out the value of the users title input
             let titleValue = titleInput.value;
 
-            //Call the createMovie function with parametres
-            var movie = MovieDatabase.createMovie(titleValue, yearInput);
+
+            /*======== YEAR INPUT ========*/
+            //Connects the year dropdown menu list in HTML with the users optional year input
+            var yearSelect = document.getElementById("year");
+            var yearOption = yearSelect.options[yearSelect.selectedIndex];
+            let yearValue = yearOption.value;
+
+
+            /*======== COVER INPUT ========*/
+            //Get the cover input element from HTML
+            let coverInput = document.getElementById("cover");
+
+            //Take out the value of the users cover input
+            let coverValue = coverInput.value;
+
+
+            /*======== GENRE INPUT ========*/
+            //Connects the genre dropdown menu list in HTML with the users optional genre input
+            let genreSelect = document.getElementById("genre");
+            let genreOption = genreSelect.options[genreSelect.selectedIndex];
+            let genreValue = genreOption.value;
+
+
+            /*======== RATINGS INPUT ========*/
+            //Get the rating input element from HTML
+            let ratingInput = document.getElementById("rating");
+
+            //Take out the value of the users title input
+            let ratingValue = parseInt(ratingInput.value);
+
+
+
+            /*======== ACTORS INPUT ========*/
+            //Get the actor input element from HTML
+            let actorInput_1 = document.getElementById("actor_1");
+            //Get the actor input element from HTML
+            let actorInput_2 = document.getElementById("actor_2");
+
+            //Take out the value of the users actor input
+            let actorValue = actorInput_1.value + actorInput_2.value;
+
+
+
+            //Call the createMovie function in the first module to this module together with the parametres
+            var movie = MovieDatabase.createMovie(titleValue, yearValue, coverValue, genreValue, ratingValue, actorValue);
 
             //Push the new movie into the empty list
             movieList.push(movie);
+            console.log(movieList);
 
-            //Get the movies-element from HTML
-            var movies = document.getElementById("movies");
 
-            //Put the new movie in the movies-element
-            movies.innerHTML = movie;
             })
-            addMovieObject();
 
 
+        }
+    }
 
-    }*/
+})();
 
-}
-getCode();
+
+//Call the functions in the getCode-module
+getCode.printOutAllMovies();
+getCode.addMoviefromInput();
+
+
 
 
 
