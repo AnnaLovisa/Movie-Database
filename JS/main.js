@@ -332,7 +332,7 @@ return {
 
 
         //Function that creates an object through a constructor and put the value of the parameters as properties in the object
-        createMovie: function(title, year,  cover, genres, ratings, average, actors){
+        createMovie: function(title, year,  cover, genres, ratings, actors){
             
             //Movie-Constructor
             function Movie(){
@@ -341,8 +341,8 @@ return {
                 this.cover = cover;
                 this.genres = genres;
                 this.ratings = ratings;
-                this.average = average;
-                this.actors = actors;       
+                /*this.average = average;*/
+                this.actors = actors;     
             }
 
 
@@ -553,18 +553,20 @@ let getCode = (function() {
 
 
             /*======== ACTORS INPUT ========*/
-            //Get the actor input element from HTML
-            let actorInput_1 = document.getElementById("actor_1");
-            //Get the actor input element from HTML
-            let actorInput_2 = document.getElementById("actor_2");
 
-            //Take out the value of the users actor input
-            let actorValue = actorInput_1.value + actorInput_2.value;
+            //Create an empty array
+            var actorArray = [];
 
+            Array.prototype.slice.call(document.getElementsByClassName("actor"))
+            //Looping through each inputvalue
+            .forEach(function(actor){
 
+            //Adds the inputvalue that I place in an objects property name to the empty array
+            actorArray.push({name: actor.value});
+            });
 
             //Call the createMovie function in the first module to this module together with the parametres
-            var movie = MovieDatabase.createMovie(titleValue, yearValue, coverValue, genreValue, ratingValue, actorValue);
+            var movie = MovieDatabase.createMovie(titleValue, yearValue, coverValue, genreValue, ratingValue, actorArray);
 
             //Push the new movie into the empty list
             movieList.push(movie);
