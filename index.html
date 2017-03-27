@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
 	<title>Movie Database - Anna Hallgren Gribbe</title>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
-<h1>Movie Database</h1>
+<h1 id="title">AM<span>Db</span></h1>
+<h3 id="underTitle">Anna's  Movie<span>Database</span></h3>
 
 
 <!--
@@ -18,61 +21,181 @@ Sätta betyg på en film
 Filtrera efter genre och betyg
 -->
 
+<div class="container">
+    <section class="row justify-content-center">
+        <!-- Button for user to show all movies -->
+        <input type="button" class="btn-space" id="submitButton_2" value="Show all movies"><br>
+        <!-- Button for user to show movies released this year -->
+        <input type="button" class="btn-space" id="submitButton_3" value="Show movies released this year"><br>
+        <!-- Button for user to show top-rated movie -->
+        <input type="button" class="btn-space" id="submitButton_4" value="Show top-rated movie"><br>
+        <!-- Button for user to show worst-rated movie -->
+        <input type="button" class="btn-space" id="submitButton_5" value="Show worst-rated movie"><br>
+    </section>
+    <section class="row" id="movies_all">
+    <!--Här visas alla filmer-->
+    </section>
 
+    <h2>Add a new movie</h2>
+    <section class="row justify-content-center space">
 	<!-- Form for user to add a new movie -->
+	<form id="form-1">
+        <div class="form-group row">
+		<!--Text Input Title-->
+		<label for="title" class="col-sm-2 form-control-label">Title: </label>
+        <div class="col-sm-10">
+			 <input id="title" name="title" type="text" size="50">
+        </div>
+		<!--Option Input Year-->
+		<label for="year" class="col-sm-2 form-control-label">Year: </label>
+        <div class="col-sm-10">
+			<select class="custom-select" id="year" name="year"></select><br>
+        </div>
+		<!--Text Input Actor-->
+		<label for="actor" class="col-sm-2 form-control-label">Actor: </label>
+        <div class="col-sm-10">
+			<input class="actor" name="actor" type="text" size="25"><br>
+        </div>
+		<label for="actor" class="col-sm-2 form-control-label">Actor: </label>
+        <div class="col-sm-10">
+			<input class="actor" name="actor" type="text" size="25"><br>
+        </div>
+		<!--Range Input Ratings-->
+		<label for="rating" class="col-sm-2 form-control-label">Ratings: </label>
+        <div class="col-sm-10">
+			1 <input id="rating" name="rating" type="range" max="10" min="1">10<br>
+        </div>
+		<!--Option Input Genre-->
+            <label for="cover" class="col-sm-2 form-control-label">Genre: </label>
+            <div class="col-sm-10">
+			    <select class="custom-select" id="genre" name="genre">
+                <option value=""></option>
+        		<option value="Drama">Drama</option>
+        		<option value="Action">Action</option>
+        		<option value="Adventure">Adventure</option>
+        		<option value="Animation">Animation</option>
+        		<option value="Comedy">Comedy</option>
+        		<option value="Crime">Crime</option>
+        		<option value="Family">Family</option>
+        		<option value="Romance">Romance</option>
+        		<option value="Horror">Horror</option>
+        		<option value="Musical">Musical</option>
+        		<option value="Sci-Fi">Sci-Fi</option>
+        		<option value="Thriller">Thriller</option>
+        		<option value="War">War</option>
+      			</select><br>
+            </div>
+      	<label for="cover" class="col-sm-2 form-control-label">Add cover: </label>
+        <div class="col-sm-10">
+			<input id="cover" name="cover" type="text" size="50"><br>
+        </div>		
+	</form>
+    <div class="col-sm-10">
+    <!--Submit Button-->
+    <input type="button" id="submitButton_1" value="Add movie"><br>
+    </div>
+    </section>
+
+            <h2>Rate movie</h2>
+    <section class="row justify-content-center space">
+
 	<form>
 		<!--Text Input Title-->
-		<label for="title">Movie Title: </label>
-			<input id="title" name="title" type="text" size="50">
-		<!--Option Input Year-->
-		<label for="year">Year: </label>
-			<select id="year" name="year"></select><br>
-		<!--Text Input Actor-->
-		<label for="actor">Actor: </label>
-			<input class="actor" name="actor" type="text" size="25"><br>
-		<label for="actor">Actor: </label>
-			<input class="actor" name="actor" type="text" size="25"><br>
+		<label for="title1" class="col-sm-2 form-control-label">Title: </label>
+        <div class="col-sm-10">
+			<input id="title1" name="title1" type="text" size="50">
+        </div>
 		<!--Range Input Ratings-->
-		<label for="rating">Ratings: </label>
-			1 <input id="rating" name="rating" type="range" max="10" min="1">10<br/>
-		<!--Option Input Genre-->
-		<label for="genre">Genre: </label>
-			    <select id="genre" name="genre">
-        		<option value="drama" selected>Drama</option>
-        		<option value="action">Action</option>
-        		<option value="adventure">Adventure</option>
-        		<option value="animation">Animation</option>
-        		<option value="comedy">Comedy</option>
-        		<option value="crime">Crime</option>
-        		<option value="family">Family</option>
-        		<option value="romance">Romance</option>
-        		<option value="horror">Horror</option>
-        		<option value="musical">Musical</option>
-        		<option value="scifi">Sci Fi</option>
-        		<option value="thriller">Thriller</option>
-        		<option value="war">War</option>
-      			</select><br>
+		<label for="rating1" class="col-sm-2 form-control-label">Ratings: </label>
 
-      	<label for="cover">Add a cover: </label>
-			<input id="cover" name="cover" type="text" size="100"><br>
+			1 <input id="rating1" name="rating1" type="range" max="10" min="1">10<br/>
 
-		<!--Submit Button-->
-		<input type="button" id="submitButton_1" value="Add movie"><br>
+        <div class="col-sm-10">
+		<!-- Button for user to rate movie -->
+		<input type="button" id="submitButton_6" value="Rate movie"><br>
+        </div>
 	</form>
+    </section>
 
-	<!-- Button for user to show all movies -->
-	<section>
-		<input type="button" id="submitButton_2" value="Show all movies"><br>
-	</section>
+    <h2>Search movie by genres</h2>
+    <section class="row justify-content-center space">
+	<form>
 
-	<section>
-		<!-- Här ska man kunna söka på en film genom att filtrera efter genre och betyg -->
-		<!-- Man ska även kunna sätta betyg på den sökta filmen -->
-	</section>
-	<div id="movies_1">
+			<!--Option Input Genre-->
+			    <select class="custom-select" id="genre1" name="genre1">
+                    <option value="">Genres</option>
+        		    <option value="Drama">Drama</option>
+        		    <option value="Action">Action</option>
+            		<option value="Adventure">Adventure</option>
+            		<option value="Animation">Animation</option>
+            		<option value="Comedy">Comedy</option>
+            		<option value="Crime">Crime</option>
+            		<option value="Family">Family</option>
+            		<option value="Romance">Romance</option>
+            		<option value="Horror">Horror</option>
+            		<option value="Musical">Musical</option>
+            		<option value="Sci-Fi">Sci-Fi</option>
+            		<option value="Thriller">Thriller</option>
+            		<option value="War">War</option>
+      			</select>
+      					<!--Option Input Genre-->
+			    <select class="custom-select" id="genre2" name="genre2">
+                    <option value="">Genres</option>
+            		<option value="Drama">Drama</option>
+            		<option value="Action">Action</option>
+            		<option value="Adventure">Adventure</option>
+            		<option value="Animation">Animation</option>
+            		<option value="Comedy">Comedy</option>
+            		<option value="Crime">Crime</option>
+            		<option value="Family">Family</option>
+            		<option value="Romance">Romance</option>
+            		<option value="Horror">Horror</option>
+            		<option value="Musical">Musical</option>
+            		<option value="Sci-Fi">Sci-Fi</option>
+            		<option value="Thriller">Thriller</option>
+            		<option value="War">War</option>
+      			</select>
+      					<!--Option Input Genre-->
+			    <select class="custom-select" id="genre3" name="genre3">
+                    <option value="">Genres</option>
+            		<option value="Drama">Drama</option>
+            		<option value="Action">Action</option>
+            		<option value="Adventure">Adventure</option>
+            		<option value="Animation">Animation</option>
+            		<option value="Comedy">Comedy</option>
+            		<option value="Crime">Crime</option>
+            		<option value="Family">Family</option>
+            		<option value="Romance">Romance</option>
+            		<option value="Horror">Horror</option>
+            		<option value="Musical">Musical</option>
+            		<option value="Sci-Fi">Sci-Fi</option>
+            		<option value="Thriller">Thriller</option>
+            		<option value="War">War</option>
+      			</select>
+      					<!--Option Input Genre-->
+			    <select class="custom-select" id="genre4" name="genre4">
+                    <option value="">Genres</option>
+            		<option value="Drama">Drama</option>
+            		<option value="Action">Action</option>
+            		<option value="Adventure">Adventure</option>
+            		<option value="Animation">Animation</option>
+            		<option value="Comedy">Comedy</option>
+            		<option value="Crime">Crime</option>
+            		<option value="Family">Family</option>
+            		<option value="Romance">Romance</option>
+            		<option value="Horror">Horror</option>
+            		<option value="Musical">Musical</option>
+            		<option value="Sci-Fi">Sci-Fi</option>
+            		<option value="Thriller">Thriller</option>
+            		<option value="War">War</option>
+      			</select>
+	
+        <input type="button" id="submitButton_7" value="Search movie"><br>
+  	
+  	</form>
+    </section>
 
-	</div>
-
+</div>
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
