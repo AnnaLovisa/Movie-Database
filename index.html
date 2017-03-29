@@ -39,32 +39,44 @@ Filtrera efter genre och betyg
     <h2>Add a new movie</h2>
     <section class="row justify-content-center space">
 	<!-- Form for user to add a new movie -->
-	<form id="form-1">
+
+        
+    <form class="form-control" id="form-1">
         <div class="form-group row">
 		<!--Text Input Title-->
 		<label for="title" class="col-sm-2 form-control-label">Title: </label>
         <div class="col-sm-10">
 			 <input id="title" name="title" type="text" size="50">
         </div>
+        </div>
+        <div class="form-group row">
 		<!--Option Input Year-->
 		<label for="year" class="col-sm-2 form-control-label">Year: </label>
         <div class="col-sm-10">
 			<select class="custom-select" id="year" name="year"></select><br>
         </div>
+        </div>
+        <div class="form-group row">
 		<!--Text Input Actor-->
 		<label for="actor" class="col-sm-2 form-control-label">Actor: </label>
         <div class="col-sm-10">
 			<input class="actor" name="actor" type="text" size="25"><br>
         </div>
+        </div>
+        <div class="form-group row">
 		<label for="actor" class="col-sm-2 form-control-label">Actor: </label>
         <div class="col-sm-10">
 			<input class="actor" name="actor" type="text" size="25"><br>
         </div>
+        </div>
+        <div class="form-group row">
 		<!--Range Input Ratings-->
 		<label for="rating" class="col-sm-2 form-control-label">Ratings: </label>
         <div class="col-sm-10">
 			1 <input id="rating" name="rating" type="range" max="10" min="1">10<br>
         </div>
+        </div>
+        <div class="form-group row">
 		<!--Option Input Genre-->
             <label for="cover" class="col-sm-2 form-control-label">Genre: </label>
             <div class="col-sm-10">
@@ -85,21 +97,26 @@ Filtrera efter genre och betyg
         		<option value="War">War</option>
       			</select><br>
             </div>
+            </div>
+        <div class="form-group row">
       	<label for="cover" class="col-sm-2 form-control-label">Add cover: </label>
         <div class="col-sm-10">
 			<input id="cover" name="cover" type="text" size="50"><br>
-        </div>		
-	</form>
+        </div>
+        </div>			
+    </form>
+    
     <div class="col-sm-10">
     <!--Submit Button-->
     <input type="button" id="submitButton_1" value="Add movie"><br>
     </div>
+    
     </section>
 
             <h2>Rate movie</h2>
     <section class="row justify-content-center space">
 
-	<form>
+	<form class="form-control" id="form-2">
 		<!--Text Input Title-->
 		<label for="title1" class="col-sm-2 form-control-label">Title: </label>
         <div class="col-sm-10">
@@ -119,7 +136,7 @@ Filtrera efter genre och betyg
 
     <h2>Search movie by genres</h2>
     <section class="row justify-content-center space">
-	<form>
+	<form class="form-control" id="form-2">
 
 			<!--Option Input Genre-->
 			    <select class="custom-select" id="genre1" name="genre1">
