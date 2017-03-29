@@ -190,9 +190,9 @@ return {
                                   <p>Average:${movies[i].average}</p>                                  
                                   `;                   
                     movies[i].actors.forEach(function(actor){
-                        result += `<p>${actor.name}</p></div>`                       
+                        result += `<p>${actor.name}</p>`;                     
                     });            
-
+                    result += `</div>`;
             }
             movies_all.innerHTML = result;
         },
