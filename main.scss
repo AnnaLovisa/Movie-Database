@@ -1,99 +1,49 @@
-body {
-	background-color: #4d5051;
-}
+/*
+Error: Invalid CSS after "#4d5051": expected expression (e.g. 1px, bold), was "; }"
+        on line 2 of main.css
 
-#title {
-	color: #8be7e7;
-	text-align: center;
-	height: 1.4em;
-}
+1: body {
+2:   background-color: #4d5051; }
+3: 
+4: #title {
+5:   color: #8be7e7;
+6:   text-align: center;
+7:   height: 1.4em; }
 
-#title span {
-	color: #d4d706;
-}
-
-#underTitle {
-	color: #8be7e7;
-	text-align: center;
-	font-size: 1.3em;
-}
-
-#underTitle span {
-	color: #d4d706;
-}
-
-.btn-space {
-	margin: 2%;
-}
-
-.space {
-	margin: 2%;
-}
-
-
-h2 {
-	color: white;
-	font-size: 1.2em;
-	text-align: center;
-	margin-top: 2%;
-}
-
-
-
-.movie-box {
-	width: auto;
-	height: auto;
-	border: 4px solid #8be7e7;
-}
-
-.movie-box p {
-	color: white;
-	font-family: 'Roboto', sans-serif;
-}
-
-form label {
-	color: white;
-	font-family: 'Roboto', sans-serif;
-}
-
-#form-1 {
-	width: 65%;
-	height: auto;
-	border: 4px solid #b1c38a;
-	padding: 1%;
-}
-
-.actor, #cover {
-	height: 1.4em;
-}
-
-#submitButton_1 {
-	margin-left: 4%;
-}
-
-#submitButton_1, #submitButton_2, #submitButton_3, #submitButton_4, #submitButton_5, #submitButton_6, #submitButton_7 {
-    background-color: transparent;
-    color: white;
-    border: 2px solid #8be7e7;
-    border-radius: 2px;
-}
-
-#submitButton_1, #submitButton_2, #submitButton_3, #submitButton_4, #submitButton_5, #submitButton_6, #submitButton_7 {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-
-#submitButton_1:hover, #submitButton_2:hover, #submitButton_3:hover, #submitButton_4:hover, #submitButton_5:hover, #submitButton_6:hover, #submitButton_7:hover {
-    background-color: #8be7e7;
-    color: white;
-}
-
-#movieTitle, #movieYear {
-	color: white;
-	text-align: center;
-}
-
-#rating1 {
-	margin-top: 2%;
-}
-
+Backtrace:
+main.css:2
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/lexer.rb:229:in `expected!'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/parser.rb:738:in `assert_done'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/parser.rb:76:in `parse'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/parser.rb:240:in `parse'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script.rb:27:in `parse'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:1151:in `parse_script'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:721:in `parse_property'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:692:in `parse_property_or_rule'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:658:in `parse_line'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:536:in `build_tree'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:555:in `block in append_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `each'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `append_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:545:in `block in build_tree'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:538:in `each'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:538:in `build_tree'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:555:in `block in append_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `each'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `append_children'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:409:in `_to_tree'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:391:in `run'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:63:in `process_result'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
+C:/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/bin/sass:13:in `<top (required)>'
+C:/Ruby23-x64/bin/sass:22:in `load'
+C:/Ruby23-x64/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"#4d5051\": expected expression (e.g. 1px, bold), was \"; }\"\A         on line 2 of main.css\A \A 1: body {\A 2:   background-color: #4d5051; }\A 3: \A 4: #title {\A 5:   color: #8be7e7;\A 6:   text-align: center;\A 7:   height: 1.4em; }"; }

@@ -15,7 +15,7 @@
     */
 
 
-let MovieDatabase = (function() {
+const MovieDatabase = (() => {
 
     /* In this scope are my private functions/variables being declared.
     All movie-objects that are in my movies-array are therefore
@@ -24,7 +24,7 @@ let MovieDatabase = (function() {
     the private scope */
 
 
-    var movies =  [
+    let movies =  [
 { 
     title: "The Great Gatsby",
     year: 2013,
@@ -180,7 +180,7 @@ return {
         //Function that returns all movies at the same time
         showAllMovies: function(){
             var result = '';
-            for(var i = 0; i < movies.length; i++){               
+            for(let i = 0; i < movies.length; i++){               
                        result += `<div class="col-sm-12 col-md-6 col-lg-3 movie-box">
                                   <h4 id="movieTitle">${movies[i].title}</h4>
                                   <h5 id=movieYear>${movies[i].year}</h5>
@@ -403,7 +403,7 @@ return {
 
 
 //Object with namespace getCode that contains all functions that take out and manipulate data from the user input
-let getCode = (function() {
+const getCode = (function() {
 
     /* The anonymous function returns an object with all the functions/methods that belong to my modules
     and all the data that is uses. By returning my functions as an object like this, it is then possible to reach those
@@ -428,7 +428,7 @@ let getCode = (function() {
             var start = 1900;
             var end = new Date().getFullYear();
             var options = "";
-                for(var year = start ; year <= end; year++){
+                for(let year = start ; year <= end; year++){
                     options += "<option>"+ year +"</option>";
                 }            
             //Put the option-element with all the looping years in the HTML-document
@@ -451,8 +451,8 @@ let getCode = (function() {
 
             /*======== YEAR INPUT ========*/
             //Connects the year dropdown menu list in HTML with the users optional year input
-            var yearSelect = document.getElementById("year");
-            var yearOption = yearSelect.options[yearSelect.selectedIndex].value;
+            let yearSelect = document.getElementById("year");
+            let yearOption = yearSelect.options[yearSelect.selectedIndex].value;
 
             /*======== COVER INPUT ========*/
             //Get the cover input element from HTML
@@ -492,7 +492,7 @@ let getCode = (function() {
             actorArray.push({name: actor.value});
             });
             //Call the createMovie function in the first module to this module together with the parametres
-            var inputMovie = new Movie(titleValue, yearOption, coverInput, genreArray, ratingArray, 0 , actorArray);
+            let inputMovie = new Movie(titleValue, yearOption, coverInput, genreArray, ratingArray, 0 , actorArray);
             //Place the new movie into database
             MovieDatabase.addMovietoDatabase(inputMovie);
             console.log(inputMovie);
@@ -511,10 +511,10 @@ let getCode = (function() {
         printOutTopRatedMovie: function(){           
             document.getElementById("submitButton_4").addEventListener("click", function(){
 
-                var topMovie = MovieDatabase.getTopRatedAverageMovie();
+                let topMovie = MovieDatabase.getTopRatedAverageMovie();
                 movies_all.innerHTML = '';
                 
-                var movieHtml = `<div class="col-sm-12 col-md-6 col-lg-4 movie-box">
+                let movieHtml = `<div class="col-sm-12 col-md-6 col-lg-4 movie-box">
                                 <h4 id="movieTitle">${topMovie.title}</h4>
                                 <h5 id="movieYear">${topMovie.year}</h5>
                                 <p><img class="img-fluid" src="${topMovie.cover}"></p>
@@ -533,10 +533,10 @@ let getCode = (function() {
         printOutWorstRatedMovie: function(){           
             document.getElementById("submitButton_5").addEventListener("click", function(){
 
-                var worstMovie = MovieDatabase.getWorstRatedAverageMovie();
+                let worstMovie = MovieDatabase.getWorstRatedAverageMovie();
                 movies_all.innerHTML = '';
                 
-                var movieHtml = `<div class="col-sm-12 col-md-6 col-lg-4 movie-box">
+                let movieHtml = `<div class="col-sm-12 col-md-6 col-lg-4 movie-box">
                                 <h4 id="movieTitle">${worstMovie.title}</h4>
                                 <h5 id="movieYear">${worstMovie.year}</h5>
                                 <p><img class="img-fluid" src="${worstMovie.cover}"></p>
