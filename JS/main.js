@@ -185,9 +185,9 @@ return {
                                   <h4 id="movieTitle">${movies[i].title}</h4>
                                   <h5 id=movieYear>${movies[i].year}</h5>
                                   <p><img class="img-fluid img-resize" alt="Responsive image" src="${movies[i].cover}"></p>
-                                  <p>Genres: ${movies[i].genres}</p>
-                                  <p>Ratings: ${movies[i].ratings}</p>
-                                  <p>Average:${movies[i].average}</p>                                  
+                                  <p><strong>Genres: </strong> ${movies[i].genres}</p>
+                                  <p><strong>Ratings: </strong>${movies[i].ratings}</p>
+                                  <p><strong>Average: </strong>${movies[i].average}</p>                                  
                                   `;                   
                     movies[i].actors.forEach(function(actor){
                         result += `<p>${actor.name}</p>`;                     
@@ -211,17 +211,17 @@ return {
                                 <h4 id="movieTitle">${movie.title}</h4>
                                 <h5 id="movieYear">${movie.year}</h5>
                                 <p><img class="img-fluid" src="${movie.cover}"></p>
-                                <p>Genres: ${movie.genres}</p>
-                                <p>Ratings: ${movie.ratings}</p>
-                                <p>Average: ${movie.average}</p>
+                                <p><strong>Genres: </strong> ${movie.genres}</p>
+                                <p><strong>Ratings: </strong><strong> ${movie.ratings}</p>
+                                <p><strong>Average: </strong>${movie.average}</p>
                                 `;
                         movie.actors.forEach(function(actor){
-                            result += `<p>${actor.name}</p></div>`;  
-                                  
+                            result += `<p>${actor.name}</p>`;                                    
                     });
-
-                    movies_all.innerHTML = result;
-                });                         
+                    result += `</div>`;
+                    movies_all.innerHTML = result; 
+                });
+                                        
         },
 
 
@@ -302,16 +302,18 @@ return {
                                 <h4 id="movieTitle">${movie.title}</h4>
                                 <h5 id="movieYear">${movie.year}</h5>
                                 <p><img class="img-fluid" src="${movie.cover}"></p>
-                                <p>Genres: ${movie.genres}</p>
-                                <p>Ratings: ${movie.ratings}</p>
-                                <p>Average: ${movie.average}</p>
+                                <p><strong>Genres: </strong> ${movie.genres}</p>
+                                <p><strong>Ratings: </strong> ${movie.ratings}</p>
+                                <p><strong>Average: </strong> ${movie.average}</p>
                                 `;
                             movie.actors.forEach(function(actor){
-                            result += `<p>${actor.name}</p></div>`;  
+                            result += `<p>${actor.name}</p>`;  
                                         
                     });
-                    movies_all.innerHTML = result;       
+                    result += `</div>`;
+                    movies_all.innerHTML = result;                           
                 });
+                
             },  
         
         //Function that adds the created object in the Movie Database-object
@@ -518,15 +520,18 @@ const getCode = (function() {
                                 <h4 id="movieTitle">${topMovie.title}</h4>
                                 <h5 id="movieYear">${topMovie.year}</h5>
                                 <p><img class="img-fluid" src="${topMovie.cover}"></p>
-                                <p>Genres: ${topMovie.genres}</p>
-                                <p>Ratings: ${topMovie.ratings}</p>
-                                <p>Average: ${topMovie.average}</p>`
+                                <p><strong>Genres: </strong> ${topMovie.genres}</p>
+                                <p><strong>Ratings: </strong> ${topMovie.ratings}</p>
+                                <p><strong>Average: </strong> ${topMovie.average}</p>`
 
                                 topMovie.actors.forEach(function(actor){
-                                    movieHtml += `<p>${actor.name}</p></div>`;
-                movies_all.innerHTML = movieHtml;
-            })             
-        })
+                                    movieHtml += `<p>${actor.name}</p>`;
+                
+                        }) 
+                    movieHtml += `</div>`;
+                    movies_all.innerHTML = movieHtml;              
+                })
+                
         },
 
         //Function that prints out the worst-rated movie-object on button-click
@@ -540,15 +545,18 @@ const getCode = (function() {
                                 <h4 id="movieTitle">${worstMovie.title}</h4>
                                 <h5 id="movieYear">${worstMovie.year}</h5>
                                 <p><img class="img-fluid" src="${worstMovie.cover}"></p>
-                                <p>Genres: ${worstMovie.genres}</p>
-                                <p>Ratings: ${worstMovie.ratings}</p>
-                                <p>Average: ${worstMovie.average}</p>`
+                                <p><strong>Genres: </strong> ${worstMovie.genres}</p>
+                                <p><strong>Ratings: </strong> ${worstMovie.ratings}</p>
+                                <p><strong>Average: </strong> ${worstMovie.average}</p>`
 
                                 worstMovie.actors.forEach(function(actor){
-                                    movieHtml += `<p>${actor.name}</p></div>`;
-                movies_all.innerHTML = movieHtml;
-            })             
-        })
+                                    movieHtml += `<p>${actor.name}</p>`;
+               
+                    }) 
+                    movieHtml += `</div>`;
+                    movies_all.innerHTML = movieHtml;                               
+             })
+        
         },   
 
         getRateMovie: function(){
