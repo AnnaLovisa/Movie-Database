@@ -178,7 +178,7 @@ const MovieDatabase = (() => {
 return {
 
         //Function that returns all movies at the same time
-        showAllMovies: function(){
+        showAllMovies: () =>{
             var result = '';
             for(let i = 0; i < movies.length; i++){               
                        result += `<div class="col-sm-12 col-md-6 col-lg-3 movie-box">
@@ -199,14 +199,14 @@ return {
 
         
         //Function that returns a list of all movies that had premiere that chosen year
-        getMoviesThisYear: function(year){
+        getMoviesThisYear: (year) => {
             var result = '';
             var actor = '';
             //Filtering all movies that had premiere the year typed in in the argument
             return movies.filter((movie) =>{
                 return movie.year == year;                
                 //Mapping out the titles of all those movies
-                }).map(function(movie){
+                }).map((movie)=>{
                     result += `<div class="col-sm-12 col-md-6 col-lg-4 movie-box">
                                 <h4 id="movieTitle">${movie.title}</h4>
                                 <h5 id="movieYear">${movie.year}</h5>
@@ -226,7 +226,7 @@ return {
 
 
         //Function that returns an average-value for each movie in the movies-array
-         getAverageRating: function(){
+         getAverageRating: () =>{
             //Looping through the whole movies-array to reach every movie's ratings-property that in turn is an array
             for(let i = 0; i < movies.length; i++){
                 /* Counting the sum for every movie's ratings-array with reduce. totalValue is set to 0
@@ -248,7 +248,7 @@ return {
 
 
         //Function that returns the movie with the highest average-value of the movie's ratings
-        getTopRatedAverageMovie: function(){            
+        getTopRatedAverageMovie: () =>{            
             /* Return a reduce-function on the movies-array with two comparison-values that compare the average-properties with each other.
             If average-value before is higher than the averagevalue now, the code will return the valueBefore, otherwise the valueNow */
             return movies.reduce(function(valueBefore, valueNow) {
@@ -258,7 +258,7 @@ return {
         },
 
         //Function that returns the movie with the lowest average-value of the movie's ratings
-        getWorstRatedAverageMovie: function(){                          
+        getWorstRatedAverageMovie: () =>{                          
                 /* Return a reduce-function on the movies-array with two comparison-values that compare the average-properties with each other.
                 If average-value before is lower than the average-value now, the code will return the valueBefore, otherwise the valueNow */
                 return movies.reduce(function(valueBefore, valueNow) {
@@ -269,7 +269,7 @@ return {
 
         /* Function that takes in a title of an already existing movie together with a new rating-value for that movie and returns that
         movie's ratings-array with the new rating-value */
-        rateMovie: function(title, rating){
+        rateMovie: (title, rating)=>{
             //Filtering out the movie who has a title the same as in the sent in title-argument
              return movies.filter((movie) =>{
                     return movie.title == title;
@@ -279,8 +279,8 @@ return {
                     return movie.ratings.push(rating);
                     //Return the updated ratings-array
                     return ratings.rating;
+                },0);
 
-                },0);           
         },
 
 
@@ -317,7 +317,7 @@ return {
             },  
         
         //Function that adds the created object in the Movie Database-object
-        addMovietoDatabase: function(newMovie){
+        addMovietoDatabase: (newMovie)=>{
                 //Placing the whole movies-array in a variable as a "new" array
                 let newMoviesArray = movies;
                 //Pushing my new object newMovie that has been created through the constructor in the "new array"
@@ -325,7 +325,8 @@ return {
                 //Placing the whole updated array into another variable that is returned
                 return newMoviesArray;
                 
-        },
+        }
+
 
 
 //End of object with all functions in the module
@@ -345,28 +346,21 @@ return {
                 this.ratings = ratings;
                 this.average = average;
                 this.actors = actors;
-                this.init();               
+                this.setAverageRating();              
           
         }
 
         Movie.prototype = function(){
 
-            init = function(){
-                if(this.ratings.length > 0){
-                this.average = calculateAverageRating(this.ratings);         
-                }
-            };
-
-            getAverageRating = function(){
-                return this.average;
-            };
-
+            //Function that sets the average-rating in the average-property from the countAverageRating 
+            //with the argument from this ratings-value 
             setAverageRating = function(){
-                this.average = calculateAverageRating(this.ratings);
+                if(this.ratings.length > 0)
+                this.average = countAverageRating(this.ratings);
             };
 
-
-            calculateAverageRating = function(ratings){
+            //Function that counts the average for a new movie
+            countAverageRating = (ratings)=>{
                 let total = ratings.reduce(function(totalValue, value){
                 //For every loop the new value is collected in the movies-array's average-property
                     return totalValue += value;         
@@ -376,17 +370,8 @@ return {
                     return (total/ratings.length).toFixed(1);
             };
 
-            setRating = function(rating){
-                this.ratings.push(rating);
-                this.average = calculateAverageRating(this.ratings); 
-            };
-
-
         return {
-            init: init,
-            setAverageRating: setAverageRating,
-            getAverageRating: getAverageRating,
-            setRating: setRating,            
+            setAverageRating: setAverageRating            
         };
     }();
   
@@ -405,7 +390,7 @@ return {
 
 
 //Object with namespace getCode that contains all functions that take out and manipulate data from the user input
-const getCode = (function() {
+const getCode = (()=> {
 
     /* The anonymous function returns an object with all the functions/methods that belong to my modules
     and all the data that is uses. By returning my functions as an object like this, it is then possible to reach those
@@ -414,7 +399,7 @@ const getCode = (function() {
     return {
 
         //Function that prints out all movie-objects in the HTML-file on button-click
-        printOutAllMovies: function(){
+        printOutAllMovies: ()=>{
             //add eventlistener to button
             document.getElementById("submitButton_2").addEventListener("click", function(){
                 //Call the function showAllMovies from my module
@@ -425,12 +410,12 @@ const getCode = (function() {
 
 
         //Function that add movies from the user-input values to the Movies Database
-        addMoviefromInput: function(){
+        addMoviefromInput: ()=>{
             //Create a loop that creates a dropdown menu list of all years
-            var start = 1900;
-            var end = new Date().getFullYear();
-            var options = "";
-                for(let year = start ; year <= end; year++){
+            let start = 1900;
+            let end = new Date().getFullYear();
+            let options = "";
+                for(let year = start; year <= end; year++){
                     options += "<option>"+ year +"</option>";
                 }            
             //Put the option-element with all the looping years in the HTML-document
@@ -443,7 +428,7 @@ const getCode = (function() {
             document.getElementById("submitButton_1").addEventListener("click", function(){
 
             //Create an empty array-list
-            var movieList = [];
+            let movieList = [];
 
             /*======== TITLE INPUT ========*/
             //Get the title input element from HTML
@@ -462,14 +447,22 @@ const getCode = (function() {
 
             /*======== GENRE INPUT ========*/
             //Connects the genre dropdown menu list in HTML with the users optional genre input
-            let genreSelect = document.getElementById("genre");
-            let genreOption = genreSelect.options[genreSelect.selectedIndex].value;
-            /*let genreValue = genreOption.value;*/
+            let genreSelect1 = document.getElementById("genreInput1");
+            let genreOption1 = genreSelect1.options[genreSelect1.selectedIndex].value;
+
+            //Connects the genre dropdown menu list in HTML with the users optional genre input
+            let genreSelect2 = document.getElementById("genreInput2");
+            let genreOption2 = genreSelect2.options[genreSelect2.selectedIndex].value;
+
+            //Connects the genre dropdown menu list in HTML with the users optional genre input
+            let genreSelect3 = document.getElementById("genreInput3");
+            let genreOption3 = genreSelect3.options[genreSelect3.selectedIndex].value;
+            
 
             //Create an empty array
             var genreArray = [];
             //Adds value of input genre to the empty array
-            genreArray.push(genreOption);
+            genreArray.push(genreOption1, genreOption2, genreOption3);
 
 
             /*======== RATINGS INPUT ========*/
@@ -480,6 +473,7 @@ const getCode = (function() {
             var ratingArray = [];
             //Adds value of input rating to the empty array
             ratingArray.push(ratingInput);
+            console.log(ratingArray);
 
 
             /*======== ACTORS INPUT ========*/
@@ -498,11 +492,22 @@ const getCode = (function() {
             //Place the new movie into database
             MovieDatabase.addMovietoDatabase(inputMovie);
             console.log(inputMovie);
+
+                    document.getElementById("title").value = "";
+                    document.getElementById("year").options[0].selected = true;
+                    document.getElementsByClassName("actor").value = "";
+                    document.getElementById("rating").value = 6;
+                    document.getElementById("genreInput1").options[0].selected = true;
+                    document.getElementById("genreInput2").options[0].selected = true;
+                    document.getElementById("genreInput3").options[0].selected = true;
+                    document.getElementById("cover").value = "";
+
             })
+
         },
 
         //Function that prints out all movie-objects released this year on button-click
-        printOutMovieYear: function(){
+        printOutMovieYear: ()=>{
             document.getElementById("submitButton_3").addEventListener("click", function(){
 
                 MovieDatabase.getMoviesThisYear(2016);
@@ -510,7 +515,7 @@ const getCode = (function() {
         },
 
         //Function that prints out the top-rated movie-object on button-click
-        printOutTopRatedMovie: function(){           
+        printOutTopRatedMovie: ()=>{           
             document.getElementById("submitButton_4").addEventListener("click", function(){
 
                 let topMovie = MovieDatabase.getTopRatedAverageMovie();
@@ -535,7 +540,7 @@ const getCode = (function() {
         },
 
         //Function that prints out the worst-rated movie-object on button-click
-        printOutWorstRatedMovie: function(){           
+        printOutWorstRatedMovie: ()=>{           
             document.getElementById("submitButton_5").addEventListener("click", function(){
 
                 let worstMovie = MovieDatabase.getWorstRatedAverageMovie();
@@ -559,7 +564,7 @@ const getCode = (function() {
         
         },   
 
-        getRateMovie: function(){
+        getRateMovie: ()=>{
          document.getElementById("submitButton_6").addEventListener("click", function(){
 
                 /*======== TITLE INPUT ========*/
@@ -576,14 +581,20 @@ const getCode = (function() {
         },
 
 
-        getSearchByGenre: function(){
+        getSearchByGenre: ()=>{
 
-
+            //Function that adds eventlisteners to the id from html
             let setGenreSubmitButton = function(){
-                let inputValue_7 = document.getElementById("submitButton_7");
+                let inputValue_7 = document.getElementById("genre1");
+                let inputValue_8 = document.getElementById("genre2");
+                let inputValue_9 = document.getElementById("genre3"); 
+                let inputValue_10 = document.getElementById("genre4"); 
 
-                /*======== GENRE INPUT ========*/
-                inputValue_7.addEventListener('click', submitSelectValue);
+                
+                inputValue_7.addEventListener("change", submitSelectValue);
+                inputValue_8.addEventListener("change", submitSelectValue);
+                inputValue_9.addEventListener("change", submitSelectValue);
+                inputValue_10.addEventListener("change", submitSelectValue);
                 };
 
             let submitSelectValue = function(){
@@ -606,6 +617,40 @@ const getCode = (function() {
             setGenreSubmitButton();
 
         },
+
+        //Function that resets option, input- and values to display movies when buttons are clicked
+        resetValues: ()=>{
+
+                document.getElementById("submitButton_6").addEventListener("click", function(){
+                    document.getElementById("title1").value = "";
+                    document.getElementById("rating1").value = 6;                 
+            })
+
+                document.getElementById("submitButton_9").addEventListener("click", function(){
+                    document.getElementById("genre1").options[0].selected = true;
+                    document.getElementById("genre2").options[0].selected = true;
+                    document.getElementById("genre3").options[0].selected = true;
+                    document.getElementById("genre4").options[0].selected = true;
+            })
+
+                document.getElementById("submitButton_1").addEventListener("click", function(){
+                    document.getElementById("title").value = "";
+                    document.getElementById("year").options[0].selected = true;
+                    document.getElementById("rating").value = 6;
+                    document.getElementById("genreInput1").options[0].selected = true;
+                    document.getElementById("genreInput2").options[0].selected = true;
+                    document.getElementById("genreInput3").options[0].selected = true;
+                    document.getElementById("cover").value = "";
+
+            })
+
+                document.getElementById("submitButton_11").addEventListener("click", function(){
+                    movies_all.innerHTML = null;
+
+            })
+                
+        }
+
     }
 })();
 
@@ -617,6 +662,7 @@ getCode.printOutTopRatedMovie();
 getCode.printOutWorstRatedMovie();
 getCode.getRateMovie();
 getCode.getSearchByGenre();
+getCode.resetValues();
 
 
 
